@@ -27,4 +27,4 @@ RUN pip install --no-cache-dir mediapipe==0.9.1
 COPY . .
 
 # Run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
+CMD ["python", "-m", "gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
