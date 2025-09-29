@@ -24,12 +24,12 @@ def detect_faces_in_image(image_bytes: bytes) -> bytes:
     # Create a copy to draw on
     output_frame = img.copy()
 
-    # Initialize FaceMesh for static images
+    # Initialize FaceMesh with parameters optimized for multiple faces
     with mp_face_mesh.FaceMesh(
             static_image_mode=True, 
-            max_num_faces=10,
-            refine_landmarks=True,
-            min_detection_confidence=0.2, 
+            max_num_faces=20, 
+            refine_landmarks=False,
+            min_detection_confidence=0.1, # Set to the lowest practical confidence
             min_tracking_confidence=0.5) as face_mesh:
 
         # Convert the BGR image to RGB
