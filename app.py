@@ -24,8 +24,9 @@ def detect_faces_in_image(image_bytes: bytes) -> bytes:
     # Create a copy to draw on
     output_frame = img.copy()
 
-    # Initialize FaceMesh
+    # Initialize FaceMesh for static images
     with mp_face_mesh.FaceMesh(
+            static_image_mode=True, # This is the crucial fix
             max_num_faces=10,
             refine_landmarks=True,
             min_detection_confidence=0.5,
@@ -81,3 +82,4 @@ if uploaded_file is not None:
             
             # Display the processed image
             st.image(processed_image_bytes, caption='Processed Image', use_column_width=True)
+
