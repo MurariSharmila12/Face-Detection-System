@@ -82,4 +82,3 @@ if uploaded_file is not None:
             
             # Display the processed image using the correct parameter
             st.image(processed_image_bytes, caption='Processed Image', use_column_width='auto')
-
