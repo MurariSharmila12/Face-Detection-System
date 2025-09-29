@@ -29,7 +29,7 @@ def detect_faces_in_image(image_bytes: bytes) -> bytes:
             static_image_mode=True, 
             max_num_faces=10,
             refine_landmarks=True,
-            min_detection_confidence=0.2, # Lowered confidence to detect more faces
+            min_detection_confidence=0.2, 
             min_tracking_confidence=0.5) as face_mesh:
 
         # Convert the BGR image to RGB
@@ -71,8 +71,8 @@ if uploaded_file is not None:
     # Read the file bytes
     image_bytes = uploaded_file.getvalue()
     
-    # Display the original image
-    st.image(image_bytes, caption='Original Image', use_column_width=True)
+    # Display the original image using the correct parameter
+    st.image(image_bytes, caption='Original Image', use_column_width='auto')
     
     # A button to trigger the detection
     if st.button('Detect Faces'):
@@ -80,6 +80,6 @@ if uploaded_file is not None:
             # Process the image to detect faces
             processed_image_bytes = detect_faces_in_image(image_bytes)
             
-            # Display the processed image
-            st.image(processed_image_bytes, caption='Processed Image', use_column_width=True)
+            # Display the processed image using the correct parameter
+            st.image(processed_image_bytes, caption='Processed Image', use_column_width='auto')
 
