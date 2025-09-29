@@ -26,10 +26,10 @@ def detect_faces_in_image(image_bytes: bytes) -> bytes:
 
     # Initialize FaceMesh for static images
     with mp_face_mesh.FaceMesh(
-            static_image_mode=True, # This is the crucial fix
+            static_image_mode=True, 
             max_num_faces=10,
             refine_landmarks=True,
-            min_detection_confidence=0.5,
+            min_detection_confidence=0.2, # Lowered confidence to detect more faces
             min_tracking_confidence=0.5) as face_mesh:
 
         # Convert the BGR image to RGB
