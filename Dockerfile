@@ -21,7 +21,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir opencv-python-headless
-RUN pip install --no-cache-dir mediapipe==0.9.1
+RUN pip install --no-cache-dir mediapipe
 
 # Copy the rest of the app code
 COPY . .
