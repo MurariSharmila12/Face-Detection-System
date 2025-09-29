@@ -1,8 +1,9 @@
 # Use an official Python runtime as a parent image
 FROM python:3.10-slim
 
-# Install system dependencies needed by OpenCV and MediaPipe
-RUN apt-get update && apt-get install -y \
+# Install system dependencies AND build tools needed by MediaPipe
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     libgl1-mesa-glx \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
@@ -20,5 +21,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Command to run the application (make sure this matches your app)
-# This example uses gunicorn for a Flask app named 'app' inside 'app.py'
 CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
