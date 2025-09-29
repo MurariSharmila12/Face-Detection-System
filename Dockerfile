@@ -26,5 +26,5 @@ RUN pip install --no-cache-dir mediapipe
 # Copy the rest of the app code
 COPY . .
 
-# Run the application using the FULL PATH to the correct python executable
-CMD ["/usr/local/bin/python", "-m", "gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
+# Command to run the Streamlit application
+CMD ["streamlit", "run", "app.py", "--server.port=10000", "--server.address=0.0.0.0"]
