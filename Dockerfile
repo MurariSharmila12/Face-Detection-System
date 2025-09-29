@@ -19,12 +19,12 @@ WORKDIR /app
 
 # Copy and install Python requirements
 COPY requirements.txt .
-# We will install mediapipe separately with a specific compatible version
+RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir opencv-python-headless
 RUN pip install --no-cache-dir mediapipe==0.9.1
 
 # Copy the rest of the app code
 COPY . .
 
-# Run the application
-CMD ["python", "-m", "gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
+# Run the application using the FULL PATH to the correct python executable
+CMD ["/usr/local/bin/python", "-m", "gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
