@@ -2,6 +2,7 @@
 import cv2
 import mediapipe as mp
 import numpy as np
+import streamlit as st
 from flask import Flask, request, send_file
 import io
 
@@ -57,4 +58,5 @@ def upload_and_detect():
             io.BytesIO(processed_image_bytes),
             mimetype='image/png'
         )
+
     return "Error processing file.", 500
