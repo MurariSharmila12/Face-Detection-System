@@ -1,24 +1,30 @@
-# Use an official Python runtime as a parent image
-FROM python:3.10-slim
+# Use a full Python 3.9 image for better compatibility
+FROM python:3.9
 
-# Install system dependencies AND build tools needed by MediaPipe
+# Install a comprehensive set of build tools and CV/media libraries
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    cmake \
     libgl1-mesa-glx \
     libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libjpeg-dev \
+    libpng-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Copy the requirements file into the container
+# Copy and install Python requirements
 COPY requirements.txt .
+# We will install mediapipe separately with a specific compatible version
+RUN pip install --no-cache-dir opencv-python-headless
+RUN pip install --no-cache-dir mediapipe==0.9.1
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the application's code
+# Copy the rest of the app code
 COPY . .
 
-# Command to run the application (make sure this matches your app)
+# Run the application
 CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
